@@ -4,7 +4,7 @@
   "metadata": {
     "colab": {
       "provenance": [],
-      "authorship_tag": "ABX9TyOcYCVIJnCvU+MRqiQeKVEz",
+      "authorship_tag": "ABX9TyOtHjkjntgg+/QBNCtCjq08",
       "include_colab_link": true
     },
     "kernelspec": {
@@ -28,7 +28,7 @@
     },
     {
       "cell_type": "code",
-      "execution_count": 33,
+      "execution_count": 6,
       "metadata": {
         "id": "HoiDrWEfKqrN"
       },
@@ -83,7 +83,7 @@
         "    def plot_sampling_distribution(self):\n",
         "\n",
         "        if len(self.slopes) == 0:\n",
-        "            print(\"Call run_simulations() first!\")\n",
+        "            raise Exception(\"Call run_simulations() first!\")\n",
         "            return\n",
         "\n",
         "        plt.hist(self.slopes, bins=20)\n",
@@ -93,7 +93,7 @@
         "\n",
         "    def find_prob(self, value, sided):\n",
         "        if len(self.slopes) == 0:\n",
-        "            print(\"Call run_simulations() first!\")\n",
+        "            raise Exception(\"Call run_simulations() first!\")\n",
         "            return\n",
         "\n",
         "        if sided == \"above\":\n",
@@ -104,14 +104,14 @@
         "            return 2 * np.mean(np.abs(self.slopes) > abs(value))\n",
         "\n",
         "        else:\n",
-        "            print(\"sided must be 'above', 'below', or 'two-sided'\")\n",
+        "            raise Exception(\"sided must be 'above', 'below', or 'two-sided'\")\n",
         "\n",
         "\n",
         "    @property\n",
         "    def slope(self) -> float:\n",
         "        \"\"\"Return the mean of the simulated slopes\"\"\"\n",
         "        if len(self.slopes) == 0:\n",
-        "            print(\"Call run_simulations() first!\")\n",
+        "            raise Exception(\"Call run_simulations() first!\")\n",
         "            return None\n",
         "\n",
         "        return np.mean(self.slopes)\n"
@@ -130,34 +130,35 @@
       "metadata": {
         "id": "h4U4fpVGPKpe"
       },
-      "execution_count": 34,
+      "execution_count": 7,
       "outputs": []
     },
     {
       "cell_type": "code",
       "source": [
-        "# call the run_simulations() without passing through argument -- should return error message\n",
-        "sim.run_simulations()"
+        "# call the plot without simulations -- should return error message\n",
+        "sim.plot_sampling_distribution()"
       ],
       "metadata": {
         "colab": {
           "base_uri": "https://localhost:8080/",
-          "height": 162
+          "height": 287
         },
         "id": "AQxmtUGpPka0",
-        "outputId": "36a3ce64-28cb-426e-bb51-bffd52be0bd3"
+        "outputId": "37f9afa4-2a2f-4e46-f807-033bc7bdead2"
       },
-      "execution_count": 38,
+      "execution_count": 8,
       "outputs": [
         {
           "output_type": "error",
-          "ename": "TypeError",
-          "evalue": "slr_slope_simulator.run_simulations() missing 1 required positional argument: 'n_sims'",
+          "ename": "Exception",
+          "evalue": "Call run_simulations() first!",
           "traceback": [
             "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
-            "\u001b[0;31mTypeError\u001b[0m                                 Traceback (most recent call last)",
-            "\u001b[0;32m/tmp/ipykernel_500/1901107816.py\u001b[0m in \u001b[0;36m<cell line: 0>\u001b[0;34m()\u001b[0m\n\u001b[1;32m      1\u001b[0m \u001b[0;31m# call the run_simulations() without passing through argument -- should return error message\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----> 2\u001b[0;31m \u001b[0msim\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mrun_simulations\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
-            "\u001b[0;31mTypeError\u001b[0m: slr_slope_simulator.run_simulations() missing 1 required positional argument: 'n_sims'"
+            "\u001b[0;31mException\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m/tmp/ipykernel_189/1619506736.py\u001b[0m in \u001b[0;36m<cell line: 0>\u001b[0;34m()\u001b[0m\n\u001b[1;32m      1\u001b[0m \u001b[0;31m# call the plot without simulations -- should return error message\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----> 2\u001b[0;31m \u001b[0msim\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mplot_sampling_distribution\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+            "\u001b[0;32m/tmp/ipykernel_189/2059495106.py\u001b[0m in \u001b[0;36mplot_sampling_distribution\u001b[0;34m(self)\u001b[0m\n\u001b[1;32m     48\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     49\u001b[0m         \u001b[0;32mif\u001b[0m \u001b[0mlen\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mslopes\u001b[0m\u001b[0;34m)\u001b[0m \u001b[0;34m==\u001b[0m \u001b[0;36m0\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 50\u001b[0;31m             \u001b[0;32mraise\u001b[0m \u001b[0mException\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"Call run_simulations() first!\"\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     51\u001b[0m             \u001b[0;32mreturn\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     52\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mException\u001b[0m: Call run_simulations() first!"
           ]
         }
       ]
@@ -171,7 +172,7 @@
       "metadata": {
         "id": "bnAmzbpyQDWs"
       },
-      "execution_count": 35,
+      "execution_count": 9,
       "outputs": []
     },
     {
@@ -186,9 +187,9 @@
           "height": 449
         },
         "id": "I0ig0H-9Q7Qn",
-        "outputId": "bbe4d5d4-0ee7-47a3-86fb-8cccbc2f714a"
+        "outputId": "9310858b-3ded-4b29-9ac1-14f9f867ecbb"
       },
-      "execution_count": 16,
+      "execution_count": 11,
       "outputs": [
         {
           "output_type": "display_data",
@@ -213,9 +214,9 @@
           "base_uri": "https://localhost:8080/"
         },
         "id": "Eu0hg3E2RJ3U",
-        "outputId": "d5fe7260-613e-41f1-fad4-1f9a13a73f46"
+        "outputId": "3cad0ef4-d75f-40e2-bea7-cedcb0486e15"
       },
-      "execution_count": 31,
+      "execution_count": 12,
       "outputs": [
         {
           "output_type": "execute_result",
@@ -225,7 +226,7 @@
             ]
           },
           "metadata": {},
-          "execution_count": 31
+          "execution_count": 12
         }
       ]
     },
@@ -240,9 +241,9 @@
           "base_uri": "https://localhost:8080/"
         },
         "id": "hzPizFvhRW3k",
-        "outputId": "da07f049-6060-4e60-8778-eddf0b604087"
+        "outputId": "c8cb17b1-eea3-4eba-a02f-295458179745"
       },
-      "execution_count": 37,
+      "execution_count": 13,
       "outputs": [
         {
           "output_type": "execute_result",
@@ -252,7 +253,7 @@
             ]
           },
           "metadata": {},
-          "execution_count": 37
+          "execution_count": 13
         }
       ]
     },
