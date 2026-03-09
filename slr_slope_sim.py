@@ -47,7 +47,7 @@ class slr_slope_simulator:
     def plot_sampling_distribution(self):
 
         if len(self.slopes) == 0:
-            print("Call run_simulations() first!")
+            raise Exception("Call run_simulations() first!")
             return
 
         plt.hist(self.slopes, bins=20)
@@ -57,7 +57,7 @@ class slr_slope_simulator:
 
     def find_prob(self, value, sided):
         if len(self.slopes) == 0:
-            print("Call run_simulations() first!")
+            raise Exception("Call run_simulations() first!")
             return
 
         if sided == "above":
@@ -68,14 +68,14 @@ class slr_slope_simulator:
             return 2 * np.mean(np.abs(self.slopes) > abs(value))
 
         else:
-            print("sided must be 'above', 'below', or 'two-sided'")
+            raise Exception("sided must be 'above', 'below', or 'two-sided'")
 
 
     @property
     def slope(self) -> float:
         """Return the mean of the simulated slopes"""
         if len(self.slopes) == 0:
-            print("Call run_simulations() first!")
+            raise Exception("Call run_simulations() first!")
             return None
 
         return np.mean(self.slopes)
@@ -88,8 +88,8 @@ sim = slr_slope_simulator(beta_0 = 12,
                     sigma = 1,
                     seed = 10)
 
-# call the run_simulations() without passing through argument -- should return error message
-sim.run_simulations()
+# call plot_sampling_distribution() first without simulations -- should return error message
+sim.plot_sampling_distribution()
 
 # run 10000 simulations
 sim.run_simulations(10000)
